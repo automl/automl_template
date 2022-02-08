@@ -8,33 +8,33 @@ repos:
     hooks:
       - id: isort
         name: isort imports automl_template
-        files: automl_template/.*
+        files: automl_template
 
       - id: isort
         name: isort imports tests
-        files: tests/.*
+        files: tests
 
   - repo: https://github.com/ambv/black
     rev: 22.1.0
     hooks:
       - id: black
         name: black formatter automl_template
-        files: automl_template/.*
+        files: automl_template
 
       - id: black
         name: black formatter tests
-        files: tests/.*
+        files: tests
 
       - id: black
         name: black formatter examples
-        files: examples/.*
+        files: examples
 
   # This is disabled as most modules fail this
   - repo: https://github.com/pycqa/pydocstyle
     rev: 6.1.1
     hooks:
       - id: pydocstyle
-        files: automl_template/.*
+        files: automl_template
         additional_dependencies: ["toml"] # Needed to parse pyproject.toml
 
   - repo: https://github.com/pre-commit/mirrors-mypy
@@ -42,15 +42,15 @@ repos:
     hooks:
       - id: mypy
         name: mypy automl_template
-        files: automl_template/.*
+        files: automl_template
 
   - repo: https://gitlab.com/pycqa/flake8
     rev: 4.0.1
     hooks:
       - id: flake8
         name: flake8 automl_template
-        files: automl_template/.*
+        files: automl_template
 
       - id: flake8
         name: flake8 tests
-        files: tests/.*
+        files: tests
