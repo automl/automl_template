@@ -1,18 +1,34 @@
-from automl_template import (
-    package_name,
-    author_email,
-    description,
-    url,
-    project_urls,
-    version,
-)
+import os
+
 import setuptools
 
+from automl_template import (
+    author_email,
+    description,
+    package_name,
+    project_urls,
+    url,
+    version,
+)
 
-def read_file(file_name):
-    with open(file_name, encoding="utf-8") as fh:
-        text = fh.read()
-    return text
+HERE = os.path.dirname(os.path.realpath(__file__))
+
+
+def read_file(filepath: str) -> str:
+    """Read in a files contents
+
+    Parameters
+    ----------
+    filepath : str
+        The name of the file
+
+    Returns
+    -------
+    str
+        The contents of the file
+    """
+    with open(filepath, "r", encoding="utf-8") as fh:
+        return fh.read()
 
 
 extras_require = {
@@ -49,7 +65,7 @@ setuptools.setup(
     name=package_name,
     author_email=author_email,
     description=description,
-    long_description=read_file("README.md"),
+    long_description=read_file(os.path.join(HERE, "README.md")),
     long_description_content_type="text/markdown",
     license="Apache-2.0",
     url=url,
@@ -57,7 +73,7 @@ setuptools.setup(
     version=version,
     packages=setuptools.find_packages(exclude=["tests"]),
     python_requires=">=3.8",
-    install_requires=read_file("./requirements.txt").split("\n"),
+    install_requires=read_file(os.path.join(HERE, "requirements.txt")).split("\n"),
     extras_require=extras_require,
     test_suite="pytest",
     platforms=["Linux"],
