@@ -26,6 +26,9 @@ We'll pretend the **name** of your package is "MyPackage" and your **package-nam
 6. In `MANIFEST.in`, use `mypackage` instead of `automl_template`
 7. In `mypackage.__init__.py`, fix `package_name="automl_template"` to `package_name="mypackage"`
 
+## Configure your editor
+Please refer to [configure your editor](#configure-your-editor)
+
 #### Enabling Docs
 Enable github pages by going to the repos `settings` and choosing `main` as your branch. You can leave the default `/root` for the folder.
 
@@ -71,6 +74,10 @@ Codecov provides free access to coverage reports on open-source repositories. We
 
 To disable this, you can remove the `codecov-test:` step from the `pytest.yml` file.
 
+## Configure your editor
+TODO
+
 ## TODO
 * Section for documentation
 * How to actually use the template
+* Section on confiureing PyCharm and vscode
