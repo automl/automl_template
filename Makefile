@@ -21,7 +21,7 @@ help:
 	@echo "* pre-commit       to run the pre-commit check"
 	@echo "* clean            to clean the dist and doc build files"
 	@echo "* build            to build a dist"
-	@echo "* doc              to generate and view the html files, checks links"
+	@echo "* docs             to generate and view the html files, checks links"
 	@echo "* examples         to run and generate the examples"
 	@echo "* publish          to help publish the current branch to pypi"
 	@echo "* test             to run the tests"
@@ -92,13 +92,13 @@ build:
 	$(PYTHON) setup.py bdist
 
 docs:
-	$(MAKE) -C ${DOCDIR} html-noexamples
+	$(MAKE) -C ${DOCDIR} doc
 	@echo
 	@echo "View docs at:"
 	@echo ${INDEX_HTML}
 
 examples:
-	$(MAKE) -C ${DOCDIR} html
+	$(MAKE) -C ${DOCDIR} examples
 	@echo
 	@echo "View docs at:"
 	@echo ${INDEX_HTML}
