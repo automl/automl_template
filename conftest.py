@@ -1,1 +1,0 @@
-# For configuration of pytest
