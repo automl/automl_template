@@ -14,17 +14,17 @@ Just skip to [steps](#steps) for using this, otherwise feel free to learn more b
 
 #### Renaming to your package name
 We need make two distinctions
-    * **name** is how it should appear in the documentation and as a title on PyPi, i.e. "AutoMLTemplate"
-    * **package-name** is the name of your `"src"` folder and how people should import it, i.e. `automl_template`.
+* **name** is how it should appear in the documentation and as a title on PyPi, i.e. "AutoMLTemplate"
+* **package-name** is the name of your `"src"` folder and how people should import it, i.e. `automl_template`.
 
 We'll pretend the **name** of your package is "MyPackage" and your **package-name**  is `mypackage`. You'll have to change these in a few locations and search and replace is your friend.
-    1. The `automl_template` folder gets changed to `mypackage`.
-    2. In `pyproject.toml`, search-replace `automl_template` to `mypackage`
-    3. In `Makefile`, you'll find two variables, `NAME` and `PACKAGE_NAME`, change these accordingly.
-    4. In `.github/workflows/pytest.yml`, change the `env` variable `package-name` from `automl_template` to `mypackage` in .
-    5. In `.github/workflows/docs.yml`, change the `env` variable `name` from `AutoMLTemplate` to `MyPackage`.
-    6. In `MANIFEST.in`, use `mypackage` instead of `automl_template`
-    7. In `mypackage.__init__.py`, fix `package_name="automl_template"` to `package_name="mypackage"`
+1. The `automl_template` folder gets changed to `mypackage`.
+2. In `pyproject.toml`, search-replace `automl_template` to `mypackage`
+3. In `Makefile`, you'll find two variables, `NAME` and `PACKAGE_NAME`, change these accordingly.
+4. In `.github/workflows/pytest.yml`, change the `env` variable `package-name` from `automl_template` to `mypackage` in .
+5. In `.github/workflows/docs.yml`, change the `env` variable `name` from `AutoMLTemplate` to `MyPackage`.
+6. In `MANIFEST.in`, use `mypackage` instead of `automl_template`
+7. In `mypackage.__init__.py`, fix `package_name="automl_template"` to `package_name="mypackage"`
 
 #### Enabling Docs
 Enable github pages by going to the repos `settings` and choosing `main` as your branch. You can leave the default `/root` for the folder.
