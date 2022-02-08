@@ -2,24 +2,26 @@
 # These have been configured to only really run short tasks. Longer form tasks
 # are usually completed in github actions.
 
-SOURCE := ${CURDIR}/automl_template
 DIR := ${CURDIR}
-DIST := ${CURDIR}/dist
-DOCDIR := ${DIR}/doc
+DIST := ${DIR}/dist
+DOCDIR := ${DIR}/docs
 INDEX_HTML := file://${DOCDIR}/html/build/index.html
+SOURCE_DIR := ${DIR}/automl_template
+TESTS_DIR := ${DIR}/tests
+EXAMPLES_DIR := ${DIR}/examples
+NAME := "AutoMLTemplate"
 
-.PHONY: help install-dev check format pre-commit clean clean-doc clean-build build doc links examples publish test
+.PHONY: help install-dev check format pre-commit clean clean-doc clean-build build docs examples publish test
 
 help:
-	@echo "Makefile AutoMLTemplate"
+	@echo "Makefile ${NAME}"
 	@echo "* install-dev      to install all dev requirements and install pre-commit"
 	@echo "* check            to check the source code for issues"
 	@echo "* format           to format the code with black and isort"
 	@echo "* pre-commit       to run the pre-commit check"
 	@echo "* clean            to clean the dist and doc build files"
 	@echo "* build            to build a dist"
-	@echo "* doc              to generate and view the html files"
-	@echo "* linkcheck        to check the documentation links"
+	@echo "* doc              to generate and view the html files, checks links"
 	@echo "* examples         to run and generate the examples"
 	@echo "* publish          to help publish the current branch to pypi"
 	@echo "* test             to run the tests"
@@ -36,41 +38,42 @@ PYDOCSTYLE ?= pydocstyle
 MYPY ?= mypy
 PRECOMMIT ?= pre-commit
 FLAKE8 ?= flake8
-
 install-dev:
 	$(PIP) install -e ".[tests,examples,docs]"
 	pre-commit install
 
 check-black:
-	$(BLACK) automl_template examples tests --check || :
+	$(BLACK) ${SOURCE_DIR} --check || :
+	$(BLACK) ${EXAMPLES_DIR} --check || :
+	$(BLACK) ${TESTS_DIR} --check || :
 
 check-isort:
-	$(ISORT) automl_template tests --check || :
+	$(ISORT) ${SOURCE_DIR} --check || :
+	$(ISORT) ${TESTS_DIR} --check || :
 
 check-pydocstyle:
-	$(PYDOCSTYLE) automl_template || :
+	$(PYDOCSTYLE) ${SOURCE_DIR} || :
 
 check-mypy:
-	$(MYPY) automl_template || :
+	$(MYPY) ${SOURCE_DIR} || :
 
 check-flake8:
-	$(FLAKE8) automl_template || :
-	$(FLAKE8) tests || :
+	$(FLAKE8) ${SOURCE_DIR} || :
+	$(FLAKE8) ${TESTS_DIR} || :
 
-# pydocstyle does not have easy ignore rules, instead, we include as they are covered
 check: check-black check-isort check-mypy check-flake8 check-pydocstyle
 
 pre-commit:
 	$(PRECOMMIT) run --all-files
 
 format-black:
-	$(BLACK) automl_template/.*
-	$(BLACK) tests/.*
-	$(BLACK) examples/.*
+	$(BLACK) ${SOURCE_DIR}
+	$(BLACK) ${TESTS_DIR}
+	$(BLACK) ${EXAMPLES_DIR}
 
 format-isort:
-	$(ISORT) automl_template
-	$(ISORT) tests
+	$(ISORT) ${SOURCE_DIR}
+	$(ISORT) ${TESTS_DIR}
 
 format: format-black format-isort
 
@@ -88,14 +91,11 @@ clean: clean-doc clean-build
 build:
 	$(PYTHON) setup.py bdist
 
-doc:
+docs:
 	$(MAKE) -C ${DOCDIR} html-noexamples
 	@echo
 	@echo "View docs at:"
 	@echo ${INDEX_HTML}
-
-links:
-	$(MAKE) -C ${DOCDIR} linkcheck
 
 examples:
 	$(MAKE) -C ${DOCDIR} html
@@ -109,12 +109,14 @@ examples:
 publish: clean-build build
 	$(PIP) install twine
 	$(PYTHON) -m twine upload --repository testpypi ${DIST}/*
+	@echo "Uploaded to testpypi so the distribution can be tested"
 	@echo
-	@echo "Test with the following line:"
-	@echo "pip install --index-url https://test.pypi.org/simple/ AutoMLTemplate"
+	@echo "Test with the following lines:"
+	@echo "pip install --index-url https://test.pypi.org/simple/ ${NAME}"
+	@echo "make test"
 	@echo
 	@echo "Once you have decided it works, publish to actual pypi with"
 	@echo "python -m twine upload dist/*"
 
 test:
-	$(PYTEST) tests
+	$(PYTEST) ${TESTS_DIR}
