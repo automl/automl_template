@@ -38,22 +38,21 @@ jobs:
 
     - name: Make docs
       run: |
-        cd docs
-        make html
+        make docs
 
-    - name: Run doctests
+    - name: Make Examples
       run: |
-        cd docs
-        make doctest
+        make examples
+
 
     - name: Pull latest gh-pages
-      if: (contains(github.ref, 'master')) && github.event_name == 'push'
+      if: (contains(github.ref, 'main')) && github.event_name == 'push'
       run: |
         cd ..
         git clone https://github.com/automl/${{ env.name }}.git --branch gh-pages --single-branch gh-pages
 
     - name: Copy new docs into gh-pages
-      if: (contains(github.ref, 'develop') || contains(github.ref, 'master')) && github.event_name == 'push'
+      if: (contains(github.ref, 'development') || contains(github.ref, 'main')) && github.event_name == 'push'
       run: |
         branch_name=${GITHUB_REF##*/}
         cd ../gh-pages
@@ -61,7 +60,7 @@ jobs:
         cp -r ../${{ env.name }}/docs/build/html $branch_name
 
     - name: Push to gh-pages
-      if: (contains(github.ref, 'master')) && github.event_name == 'push'
+      if: (contains(github.ref, 'main')) && github.event_name == 'push'
       run: |
         last_commit=$(git log --pretty=format:"%an: %s")
         cd ../gh-pages
