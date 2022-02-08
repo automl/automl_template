@@ -37,6 +37,9 @@ class MyClass:
         d : Optional[List[float]] = None
             A description for the optional parameter c
         """
+        if a < 1:
+            raise ValueError("MyClass(a) must be a positive integer")
+
         self.a = a
         self.b = b
         self.c = c
@@ -72,7 +75,7 @@ class MyClass:
         """
         return {f"hoop_{i}": "foo" if self.c else "bar" for i in range(self.a)}
 
-    def some_function(self, x: int) -> int:
+    def oreos(self, x: int) -> int:
         """A function that does something
 
         Here is a longer description which might give some more details or even
