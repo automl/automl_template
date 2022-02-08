@@ -37,7 +37,6 @@ env:
   code-cov-os: ubuntu-latest  # Copied in job setup
   code-cov-python-version: "3.8"
   code-cov-args: >-
-    --cov=automl_template
     --cov-report=xml
 
 jobs:
@@ -79,7 +78,6 @@ jobs:
         echo "::set-output name=BEFORE::$(git status --porcelain -b)"
 
     - name: Tests
-      timeout-minutes: 45
       run: |
         pytest ${{ env.pytest-args }} ${{ env.test-dir }}
 
@@ -126,7 +124,6 @@ jobs:
         python -m pip install -e ".${{ env.extra-requires }}"
 
     - name: Tests
-      timeout-minutes: 45
       run: |
           pytest ${{ env.pytest-args }} ${{ env.test-dir }}
           #
@@ -167,7 +164,6 @@ jobs:
         python -m pip install ${{ env.sdist_name }}${{ env.extra-requires }}
 
     - name: Tests
-      timeout-minutes: 45
       run: |
         pytest ${{ env.pytest-args }} ${{ env.test-dir }}
 
@@ -197,9 +193,8 @@ jobs:
         python -m pip install -e ".${{ env.extra-requires }}"
 
     - name: Tests
-      timeout-minutes: 45
       run: |
-        pytest ${{ env.pytest-args }} ${{ env.code-cov-args }} ${{ env.test-dir }}
+        pytest ${{ env.pytest-args }} --cov=${{env.package-name}} ${{ env.code-cov-args }} ${{ env.test-dir }}
 
     - name: Upload coverage
       uses: codecov/codecov-action@v2
