@@ -11,8 +11,8 @@ repos:
         files: automl_template/.*
 
       - id: isort
-        name: isort imports test
-        files: test/.*
+        name: isort imports tests
+        files: tests/.*
 
   - repo: https://github.com/ambv/black
     rev: 22.1.0
@@ -22,8 +22,8 @@ repos:
         files: automl_template/.*
 
       - id: black
-        name: black formatter test
-        files: test/.*
+        name: black formatter tests
+        files: tests/.*
 
       - id: black
         name: black formatter examples
@@ -52,5 +52,5 @@ repos:
         files: automl_template/.*
 
       - id: flake8
-        name: flake8 test
-        files: test/.*
+        name: flake8 tests
+        files: tests/.*

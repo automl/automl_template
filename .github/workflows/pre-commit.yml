@@ -5,15 +5,15 @@ on:
   # Trigger manually
   workflow_dispatch:
 
-  # Trigger on any push to the master
+  # Trigger on any push to the main
   push:
     branches:
-      - master
+      - main
 
-  # Trigger on any push to a PR that targets master
+  # Trigger on any push to a PR that targets main
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
 

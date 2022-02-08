@@ -2,6 +2,12 @@
 # These have been configured to only really run short tasks. Longer form tasks
 # are usually completed in github actions.
 
+SOURCE := ${CURDIR}/automl_template
+DIR := ${CURDIR}
+DIST := ${CURDIR}/dist
+DOCDIR := ${DIR}/doc
+INDEX_HTML := file://${DOCDIR}/html/build/index.html
+
 .PHONY: help install-dev check format pre-commit clean clean-doc clean-build build doc links examples publish test
 
 help:
@@ -31,19 +37,15 @@ MYPY ?= mypy
 PRECOMMIT ?= pre-commit
 FLAKE8 ?= flake8
 
-DIR := ${CURDIR}
-DIST := ${CURDIR}/dist
-DOCDIR := ${DIR}/doc
-INDEX_HTML := file://${DOCDIR}/html/build/index.html
 install-dev:
-	$(PIP) install -e ".[test,examples,docs]"
+	$(PIP) install -e ".[tests,examples,docs]"
 	pre-commit install
 
 check-black:
-	$(BLACK) automl_template examples test --check || :
+	$(BLACK) automl_template examples tests --check || :
 
 check-isort:
-	$(ISORT) automl_template test --check || :
+	$(ISORT) automl_template tests --check || :
 
 check-pydocstyle:
 	$(PYDOCSTYLE) automl_template || :
@@ -53,23 +55,22 @@ check-mypy:
 
 check-flake8:
 	$(FLAKE8) automl_template || :
-	$(FLAKE8) test || :
+	$(FLAKE8) tests || :
 
 # pydocstyle does not have easy ignore rules, instead, we include as they are covered
-check: check-black check-isort check-mypy check-flake8 # check-pydocstyle
+check: check-black check-isort check-mypy check-flake8 check-pydocstyle
 
 pre-commit:
 	$(PRECOMMIT) run --all-files
 
 format-black:
 	$(BLACK) automl_template/.*
-	$(BLACK) test/.*
+	$(BLACK) tests/.*
 	$(BLACK) examples/.*
 
 format-isort:
 	$(ISORT) automl_template
-	$(ISORT) test
-
+	$(ISORT) tests
 
 format: format-black format-isort
 
@@ -116,4 +117,4 @@ publish: clean-build build
 	@echo "python -m twine upload dist/*"
 
 test:
-	$(PYTEST) test
+	$(PYTEST) tests

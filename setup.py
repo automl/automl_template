@@ -1,5 +1,4 @@
-# -*- encoding: utf-8 -*-
-from src import (
+from automl_template import (
     package_name,
     author_email,
     description,
@@ -56,9 +55,7 @@ setuptools.setup(
     url=url,
     project_urls=project_urls,
     version=version,
-    packages=setuptools.find_packages(
-        exclude=["*.tests", "*.tests.*", "tests.*", "tests"],
-    ),
+    packages=setuptools.find_packages(exclude=["tests"]),
     python_requires=">=3.8",
     install_requires=read_file("./requirements.txt").split("\n"),
     extras_require=extras_require,
@@ -72,7 +69,7 @@ setuptools.setup(
         "Intended Audience :: Developers",
         "Intended Audience :: Education",
         "Intended Audience :: Science/Research",
-        "Topic :: Scientific/Engineering :: Artificial Intelligence",
         "Topic :: Scientific/Engineering",
+        "Topic :: Scientific/Engineering :: Artificial Intelligence",
     ],
 )

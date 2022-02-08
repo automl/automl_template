@@ -9,5 +9,5 @@ include requirements.txt
 include automl_template/py.typed  # This file is to export types
 
 # Remove tests and examples recursively
-prune test
+prune tests
 prune examples

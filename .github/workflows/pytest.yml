@@ -4,15 +4,15 @@ on:
   # Allow to manually trigger through github API
   workflow_dispatch:
 
-  # Triggers with push to master
+  # Triggers with push to main
   push:
     branches:
-      - master
+      - main
 
-  # Triggers with push to a pr aimed at master
+  # Triggers with push to a pr aimed at main
   pull_request:
     branches:
-      - master
+      - main
 
   schedule:
     # Every day at 7AM UTC
@@ -21,8 +21,8 @@ on:
 env:
 
   package-name: automl_template
-  test-dir: test
-  extra-requires: "[test]"  # "" for no extra_requires
+  test-dir: tests
+  extra-requires: "[tests]"  # "" for no extra_requires
 
   # Arguments used for pytest
   pytest-args: >-
