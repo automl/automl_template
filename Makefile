@@ -1,15 +1,16 @@
-# A simple makefile to help with small tasks related to development of AutoMLTemplate
 # These have been configured to only really run short tasks. Longer form tasks
 # are usually completed in github actions.
 
+NAME := AutoMLTemplate
+PACKAGE_NAME := automl_template
+
 DIR := ${CURDIR}
+SOURCE_DIR := ${CURDIR}/${PACKAGE_NAME}
 DIST := ${DIR}/dist
 DOCDIR := ${DIR}/docs
 INDEX_HTML := file://${DOCDIR}/html/build/index.html
-SOURCE_DIR := ${DIR}/automl_template
 TESTS_DIR := ${DIR}/tests
 EXAMPLES_DIR := ${DIR}/examples
-NAME := "AutoMLTemplate"
 
 .PHONY: help install-dev check format pre-commit clean clean-doc clean-build build docs examples publish test
 
