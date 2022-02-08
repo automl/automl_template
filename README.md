@@ -74,6 +74,9 @@ Codecov provides free access to coverage reports on open-source repositories. We
 
 To disable this, you can remove the `codecov-test:` step from the `pytest.yml` file.
 
+#### Citations
+TODO
+
 ## Configure your editor
 TODO
 
