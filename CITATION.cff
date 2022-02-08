@@ -1,0 +1,28 @@
+---
+cff-version: 1.2.0
+
+message: "This is the message displayed when viewing the citation on github"
+
+title: "automl_template"
+date-released: "2022-02-08"
+
+url: "https://automl.github.io/automl_template/main/"
+repository-code: "https://github.com/automl/automl_template"
+
+version: "0.0.1"
+
+type: "template"
+keywords:
+  - "template"
+
+license: "Apache 2.0"
+
+authors:
+  - family-names: "Bergman"
+    given-names: "Eddie"
+    affiliation: "University of Freiburg, Germany"
+
+  - family-names: "Sass"
+    given-names: "René"
+    affiliation: "University of Hannover"
+...
