@@ -84,3 +84,4 @@ TODO
 * Section for documentation
 * How to actually use the template
 * Section on confiureing PyCharm and vscode
+* Need to create branch gh-pages
