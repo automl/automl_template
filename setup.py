@@ -51,12 +51,12 @@ extras_require = {
         "seaborn",
     ],
     "docs": [
-        "sphinx<4.3",
+        "sphinx",
         "sphinx-gallery",
-        "sphinx_bootstrap_theme",
         "numpydoc",
         "sphinx_toolbox",
-        "docutils==0.16",
+        "docutils",
+        "automl_sphinx_theme",
     ],
 }
 

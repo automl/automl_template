@@ -4,13 +4,13 @@
 NAME := AutoMLTemplate
 PACKAGE_NAME := automl_template
 
-DIR := ${CURDIR}
-SOURCE_DIR := ${CURDIR}/${PACKAGE_NAME}
-DIST := ${DIR}/dist
-DOCDIR := ${DIR}/docs
-INDEX_HTML := file://${DOCDIR}/html/build/index.html
-TESTS_DIR := ${DIR}/tests
-EXAMPLES_DIR := ${DIR}/examples
+DIR := "${CURDIR}"
+SOURCE_DIR := "${CURDIR}/${PACKAGE_NAME}"
+DIST := "${DIR}/dist"
+DOCDIR := "${DIR}/docs"
+INDEX_HTML := "file://${DOCDIR}/build/html/index.html"
+TESTS_DIR := "${DIR}/tests"
+EXAMPLES_DIR := "${DIR}/examples"
 
 .PHONY: help install-dev check format pre-commit clean clean-doc clean-build build docs examples publish test
 
@@ -90,10 +90,10 @@ clean: clean-doc clean-build
 
 # Build a distribution in ./dist
 build:
-	$(PYTHON) setup.py bdist
+	$(PYTHON) setup.py sdist
 
 docs:
-	$(MAKE) -C ${DOCDIR} doc
+	$(MAKE) -C ${DOCDIR} docs
 	@echo
 	@echo "View docs at:"
 	@echo ${INDEX_HTML}
@@ -107,17 +107,23 @@ examples:
 # Publish to testpypi
 # Will echo the commands to actually publish to be run to publish to actual PyPi
 # This is done to prevent accidental publishing but provide the same conveniences
-publish: clean-build build
+publish: clean build
 	$(PIP) install twine
 	$(PYTHON) -m twine upload --repository testpypi ${DIST}/*
-	@echo "Uploaded to testpypi so the distribution can be tested"
 	@echo
-	@echo "Test with the following lines:"
-	@echo "pip install --index-url https://test.pypi.org/simple/ ${NAME}"
-	@echo "make test"
+	@echo "Test with the following:"
+	@echo "* Create a new virtual environment to install the uplaoded distribution into"
+	@echo "* Run the following:"
+	@echo
+	@echo "        pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ ${NAME}"
+	@echo
+	@echo "* Run this to make sure it can import correctly, plus whatever else you'd like to test:"
+	@echo
+	@echo "        python -c 'import ${PACKAGE_NAME}'"
 	@echo
 	@echo "Once you have decided it works, publish to actual pypi with"
-	@echo "python -m twine upload dist/*"
+	@echo
+	@echo "    python -m twine upload dist/*"
 
 test:
 	$(PYTEST) ${TESTS_DIR}
