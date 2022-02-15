@@ -45,7 +45,7 @@ repos:
       - id: pydocstyle
         files: <<package-name>>
         additional_dependencies: ["toml"] # Needed to parse pyproject.toml
-  enderequires::pydocstyle>>
+  endrequires::pydocstyle>>
 
   <<requires::mypy
   - repo: https://github.com/pre-commit/mirrors-mypy

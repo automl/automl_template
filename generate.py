@@ -1,31 +1,34 @@
-from typing import Any, Dict, List, Optional, Union
-
 import sys
-from glob import iglob
+from itertools import chain
 from pathlib import Path
 from pprint import pprint
 from shutil import copytree
+from typing import Any, Dict, List, Optional, Union
 
 HERE = Path(__file__).parent.resolve()
 TEMPLATE = HERE / "_templates"
 TMPDIR = HERE / "_tmp"
 WORKFLOWS = TEMPLATE / ".github" / "workflows"
 
+checkers = ["mypy", "flake8", "pydocstyle"]
+formatters = ["black", "isort"]
+
 files: Dict[Path, Optional[List[str]]] = {
     TEMPLATE / "docs": ["docs"],
     TEMPLATE / "examples": ["docs"],
     TEMPLATE / "tests": ["testing"],
     TEMPLATE / ".flake8": ["flake8"],
-    TEMPLATE / ".pre-commit-config.yaml": ["isort", "mypy", "flake8", "pydocstyle", "black"],
-    TEMPLATE / "pyproject.toml": ["isort", "mypy", "pydocstyle", "black"],
+    TEMPLATE / ".pre-commit-config.yaml": checkers + formatters,
+    TEMPLATE / "pyproject.toml": formatters + ["mypy", "pydocstyle", "testing"],
     TEMPLATE / "LICENSE.txt": ["license"],
     TEMPLATE / "CITATION.cff": ["citation"],
     TEMPLATE / ".codecov.yml": ["testing"],
-    WORKFLOWS / "citation_cff.yml": ["citation"],
+    WORKFLOWS / "citation_cff.yml": ["citations"],
     WORKFLOWS / "docs.yml": ["docs"],
-    WORKFLOWS / "pre-commit.yml": ["isort", "mypy", "flake8", "pydocstyle", "black"],
+    WORKFLOWS / "pre-commit.yml": checkers + formatters,
     WORKFLOWS / "pytest.yml": ["testing"],
-    TEMPLATE / "src": None,
+    TEMPLATE / "src" / "py.typed": ["mypy"],
+    TEMPLATE / "src" / "__init__.py": None,
     TEMPLATE / "setup.py": None,
     TEMPLATE / "Makefile": None,
     TEMPLATE / "MANIFEST.in": None,
@@ -209,6 +212,10 @@ predefined_configs = {
 }
 
 
+def path_replace(path: Path, part: Path, newpart: Path) -> Path:
+    return Path(str(path).replace(str(part), str(newpart)))
+
+
 def help(args: List[str]) -> str:
     err = f"Unrecognized command {' '.join(args)}."
     usage = f"Please use as `{args[0]} [config-kind]`"
@@ -239,7 +246,7 @@ def find_all(string: str, substring: str) -> List[int]:
 
 
 def find_and_replace(data: str, key: str, value: Union[str, bool]) -> str:
-    """Find and replace."""
+    """Find and replace"""
     # Should go in a function alone
     data = data.replace(f"<<{str(key)}>>", str(value))
 
@@ -301,16 +308,15 @@ def replace_templates(
     params: Dict[str, str],
     features: Dict[str, bool],
 ) -> None:
-    # This will return relative paths
-    glob_pattern = str(dir / "**/*")
-    print(glob_pattern)
-
     if not out.exists():
         out.mkdir()
 
-    for filename in iglob(glob_pattern, recursive=True):
+    for filename in chain(dir.glob("**/*"), dir.glob("**/.*")):
+        if ".mypy_cache" in filename.parts:
+            continue
+
         filesrc = Path(filename)
-        filedst = Path(filename.replace(str(dir), str(out)))
+        filedst = path_replace(filesrc, TEMPLATE, TMPDIR)
         print(filesrc)
         print(filedst)
 
@@ -347,12 +353,22 @@ def generate(params: Dict[str, str], features: Dict[str, bool]) -> None:
         if depends_on is None or any(set(depends_on) & set(included_features)):
 
             # Where the file has the templates filled in
-            generated_template = Path(str(filesrc).replace(str(TEMPLATE), str(TMPDIR)))
+            generated_template = path_replace(filesrc, TEMPLATE, TMPDIR)
 
             # Where it should go
-            file_dst = HERE / generated_template.name
+            file_dst = path_replace(generated_template, TMPDIR, HERE)
 
-            # Move it
+            # If it's a directory, just make it if needed
+            if file_dst.is_dir():
+                if file_dst.exists():
+                    continue
+                else:
+                    file_dst.mkdir()
+
+            # If a path doesn't have its folder existing, create it
+            if not file_dst.parent.exists():
+                file_dst.parent.mkdir(parents=True)
+
             generated_template.rename(file_dst)
 
     # Rename the src folder
@@ -387,17 +403,18 @@ def get_params() -> Dict[str, str]:
         print("Exiting")
         sys.exit(1)
     else:
+
         return params
 
 
 def get_features(config_kind: Optional[str]) -> Dict[str, bool]:
     if config_kind is None:
-        user_features = {}
+        features = {}
     else:
-        user_features = predefined_configs[config_kind]
+        features = predefined_configs[config_kind]
 
     feature_options = options["features"]
-    missing_features = set(feature_options) - set(user_features)
+    missing_features = set(feature_options) - set(features)
 
     for key in missing_features:
         prompt = feature_options[key]["prompt"]
@@ -414,21 +431,29 @@ def get_features(config_kind: Optional[str]) -> Dict[str, bool]:
         value = input("> ")
 
         if value.lower() == "n":
-            user_features[key] = False
+            features[key] = False
         elif value.lower() == "y":
-            user_features[key] = True
+            features[key] = True
         else:
-            user_features[key] = default
+            features[key] = default
 
     print("Confirm? (y\\n)")
-    pprint(user_features, indent=4)
+    pprint(features, indent=4)
 
     value = input("> ")
     if value.lower() == "n":
         print("Exiting setup")
         sys.exit(1)
 
-    return user_features
+    if set(features) & set(checkers):
+        print("include checkers")
+        features["checkers"] = True
+
+    if set(features) & set(formatters):
+        print("include formatters")
+        features["formatters"] = True
+
+    return features
 
 
 if __name__ == "__main__":

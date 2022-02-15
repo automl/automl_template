@@ -15,12 +15,11 @@ endrequires::docs>>
 <<requires::testing TESTS_DIR := "${DIR}/tests" endrequires::testing>>
 
 .PHONY: help install-dev <<requires::checkers check endrequires::checkers>> <<requires::formatters format endrequires::formatters>> <<requires::pre-commit pre-commit endrequires::pre-commit>> clean <<requires::docs docs clean-doc examples endrequires::docs>> <<requires::packaging clean-build build publish endrequires::packaging>> <<requires::testing test endrequires::testing>>
-	
 
 help:
 	@echo "Makefile ${NAME}"
 	@echo "* install-dev      to install all dev requirements and install pre-commit"
-<<requires::checkers 	@echo "* check            to check the source code for issues" endrequires::checkers>>
+<<requires::checkers	@echo "* check            to check the source code for issues" endrequires::checkers>>
 <<requires::formatters	@echo "* format           to format the code with black and isort" endrequires::formatters>>
 <<requires::pre-commit	@echo "* pre-commit       to run the pre-commit check" endrequires::pre-commit>>
 	@echo "* clean            to clean any doc or build files
@@ -94,9 +93,9 @@ format-isort:
 	<<requires::testing $(ISORT) ${TESTS_DIR} endrequires::testing>>
 endrequires::isort>>
 
-<<requires::formatting
+<<requires::formatters
 format: <<requires::black format-black endrequires::black>> <<requires::isort format-isort endrequires::isort>>
-endrequires::formatting>>
+endrequires::formatters>>
 
 <<requires::docs
 clean-doc:
