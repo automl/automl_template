@@ -1,6 +1,5 @@
 import os
 
-
 import setuptools
 
 from automl_template import (
