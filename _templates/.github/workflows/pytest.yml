@@ -19,7 +19,7 @@ on:
 
 env:
 
-  package-name: automl_template
+  package-name: <<package-name>>
   test-dir: tests
   extra-requires: "[tests]"  # "" for no extra_requires
 

@@ -2,55 +2,72 @@
 # Click the repo and update to latest tags.
 # If things break on update, raise an issue
 repos:
-
+  <<requires::isort
   - repo: https://github.com/pycqa/isort
     rev: 5.10.1
     hooks:
       - id: isort
-        name: isort imports automl_template
-        files: automl_template
+        name: isort imports <<package-name>>
+        files: <<package-name>>
 
+      <<requires::testing
       - id: isort
         name: isort imports tests
         files: tests
+      endrequires::testing>>
+  endrequires::isort>>
 
+  <<requires::black
   - repo: https://github.com/ambv/black
     rev: 22.1.0
     hooks:
       - id: black
-        name: black formatter automl_template
-        files: automl_template
+        name: black formatter <<package-name>>
+        files: <<package-name>>
 
+      <<requires::testing
       - id: black
         name: black formatter tests
         files: tests
+      endrequires::testing>>
 
+      <<requires::docs
       - id: black
         name: black formatter examples
         files: examples
+      endrequires::docs>>
+  endrequires::black>>
 
-  # This is disabled as most modules fail this
+  <<requires::pydocstyle
   - repo: https://github.com/pycqa/pydocstyle
     rev: 6.1.1
     hooks:
       - id: pydocstyle
-        files: automl_template
+        files: <<package-name>>
         additional_dependencies: ["toml"] # Needed to parse pyproject.toml
+  enderequires::pydocstyle>>
 
+  <<requires::mypy
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v0.930
     hooks:
       - id: mypy
-        name: mypy automl_template
-        files: automl_template
+        name: mypy <<package-name>>
+        files: <<package-name>>
+  endrequires::mypy>>
 
+  <<requires::flake8
   - repo: https://gitlab.com/pycqa/flake8
     rev: 4.0.1
     hooks:
       - id: flake8
-        name: flake8 automl_template
-        files: automl_template
+        name: flake8 <<package-name>>
+        files: <<package-name>>
 
+      <<requires::testing
       - id: flake8
         name: flake8 tests
         files: tests
+      endrequires::testing>>
+
+  endrequires::flake8>>
