@@ -17,7 +17,7 @@ on:
 
 env:
 
-  name: "AutoMLTemplate"
+  name: <<name>>
 
 jobs:
 
@@ -34,7 +34,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install -e ".[docs]"
+        pip install -e ".[dev]"
 
     - name: Make docs
       run: |
@@ -46,13 +46,13 @@ jobs:
 
 
     - name: Pull latest gh-pages
-      if: (contains(github.ref, 'main')) && github.event_name == 'push'
+      if: (contains(github.ref, 'main'))
       run: |
         cd ..
         git clone https://github.com/automl/${{ env.name }}.git --branch gh-pages --single-branch gh-pages
 
     - name: Copy new docs into gh-pages
-      if: (contains(github.ref, 'development') || contains(github.ref, 'main')) && github.event_name == 'push'
+      if: (contains(github.ref, 'development') || contains(github.ref, 'main'))
       run: |
         branch_name=${GITHUB_REF##*/}
         cd ../gh-pages
@@ -60,7 +60,7 @@ jobs:
         cp -r ../${{ env.name }}/docs/build/html $branch_name
 
     - name: Push to gh-pages
-      if: (contains(github.ref, 'main')) && github.event_name == 'push'
+      if: (contains(github.ref, 'main'))
       run: |
         last_commit=$(git log --pretty=format:"%an: %s")
         cd ../gh-pages

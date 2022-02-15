@@ -10,8 +10,7 @@ on:
       - main
 
   # Triggers with push to a pr aimed at main
-  pull_request:
-    branches:
+  pull_request: branches:
       - main
 
   schedule:
@@ -20,7 +19,7 @@ on:
 
 env:
 
-  package-name: automl_template
+  package-name: <<package-name>>
   test-dir: tests
   extra-requires: "[tests]"  # "" for no extra_requires
 

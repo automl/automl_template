@@ -32,34 +32,33 @@ def read_file(filepath: str) -> str:
 
 
 extras_require = {
-    "tests": [
+    "dev": [
+        <<requires::testing
         "pytest>=4.6",
         "pytest-cov",
         "pytest-xdist",
         "pytest-timeout",
-        "mypy",
-        "isort",
-        "black",
-        "pydocstyle",
-        "pre-commit",
-        "flake8",
-    ],
-    "examples": [
+        endrequires::testing>>
+        <<requires::docs
         "matplotlib",
         "jupyter",
         "notebook",
         "seaborn",
-    ],
-    "docs": [
         "sphinx",
         "sphinx-gallery",
         "numpydoc",
         "sphinx_toolbox",
         "docutils",
         "automl_sphinx_theme",
-    ],
+        endrequires::docs>>
+        <<requires::mypy "mypy", endrequires::mypy>>
+        <<requires::isort "isort", endrequires::isort>>
+        <<requires::black "black", endrequires::black>>
+        <<requires::pydocstyle "pydocstlye", endrequires::pydocstyle>>
+        <<requires::flake8 "flake8", endrequires::flake8>>
+        <<requires::pre-commit "pre-commit", endrequires::pre-commit>>
+    ]
 }
-
 
 setuptools.setup(
     name=package_name,
@@ -67,15 +66,15 @@ setuptools.setup(
     description=description,
     long_description=read_file(os.path.join(HERE, "README.md")),
     long_description_content_type="text/markdown",
-    license="Apache-2.0",
-    url=url,
-    project_urls=project_urls,
+    <<requires::license license="Apache-2.0", endrequires::license>>
+    <<requires::url url=url endrequires::url>>,
+    <<requires::packaging project_urls=project_urls, endrequires::packaging>>
     version=version,
     packages=setuptools.find_packages(exclude=["tests"]),
     python_requires=">=3.8",
     install_requires=read_file(os.path.join(HERE, "requirements.txt")).split("\n"),
     extras_require=extras_require,
-    test_suite="pytest",
+    <<requires::testing test_suite="pytest", endrequires::testing>>
     platforms=["Linux"],
     classifiers=[
         "Programming Language :: Python :: 3.8",
