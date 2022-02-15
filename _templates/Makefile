@@ -19,15 +19,15 @@ endrequires::docs>>
 help:
 	@echo "Makefile ${NAME}"
 	@echo "* install-dev      to install all dev requirements and install pre-commit"
-<<requires::checkers	@echo "* check            to check the source code for issues" endrequires::checkers>>
-<<requires::formatters	@echo "* format           to format the code with black and isort" endrequires::formatters>>
-<<requires::pre-commit	@echo "* pre-commit       to run the pre-commit check" endrequires::pre-commit>>
-	@echo "* clean            to clean any doc or build files
-<<requires::packaging	@echo "* build            to build a dist" endrequires::packaging>>
-<<requires::docs	@echo "* docs             to generate and view the html files, checks links" endrequires::docs>>
-<<requires::docs	@echo "* examples         to run and generate the examples" endrequires::docs>>
-<<requires::packaging	@echo "* publish          to help publish the current branch to pypi" endrequires::packaging>>
-<<requires::testing	@echo "* test             to run the tests" endrequires::testing>>
+	@echo "* clean            to clean any doc or build files"
+	<<requires::checkers @echo "* check            to check the source code for issues" endrequires::checkers>>
+	<<requires::formatters @echo "* format           to format the code with black and isort" endrequires::formatters>>
+	<<requires::pre-commit @echo "* pre-commit       to run the pre-commit check" endrequires::pre-commit>>
+	<<requires::packaging @echo "* build            to build a dist" endrequires::packaging>>
+	<<requires::docs @echo "* docs             to generate and view the html files, checks links" endrequires::docs>>
+	<<requires::docs @echo "* examples         to run and generate the examples" endrequires::docs>>
+	<<requires::packaging @echo "* publish          to help publish the current branch to pypi" endrequires::packaging>>
+	<<requires::testing @echo "* test             to run the tests" endrequires::testing>>
 
 PYTHON ?= python
 <<requires::testing PYTEST ?= python -m pytest endrequires::testing>>
