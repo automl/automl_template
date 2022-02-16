@@ -2,7 +2,7 @@ import os
 
 import setuptools
 
-from automl_template import (
+from <<package-name>> import (
     author_email,
     description,
     package_name,
@@ -15,18 +15,20 @@ HERE = os.path.dirname(os.path.realpath(__file__))
 
 
 def read_file(filepath: str) -> str:
-    """Read in a files contents
+    """
+    Read in a files contents
 
     Parameters
     ----------
     filepath : str
-        The name of the file
+        The name of the file.
 
     Returns
     -------
     str
-        The contents of the file
+        The contents of the file.
     """
+
     with open(filepath, "r", encoding="utf-8") as fh:
         return fh.read()
 
@@ -34,27 +36,21 @@ def read_file(filepath: str) -> str:
 extras_require = {
     "dev": [
         <<requires::testing
+        # Test
         "pytest>=4.6",
         "pytest-cov",
         "pytest-xdist",
         "pytest-timeout",
         endrequires::testing>>
         <<requires::docs
-        "matplotlib",
-        "jupyter",
-        "notebook",
-        "seaborn",
-        "sphinx",
-        "sphinx-gallery",
-        "numpydoc",
-        "sphinx_toolbox",
-        "docutils",
+        # Docs
         "automl_sphinx_theme",
         endrequires::docs>>
+        # Others
         <<requires::mypy "mypy", endrequires::mypy>>
         <<requires::isort "isort", endrequires::isort>>
         <<requires::black "black", endrequires::black>>
-        <<requires::pydocstyle "pydocstlye", endrequires::pydocstyle>>
+        <<requires::pydocstyle "pydocstyle", endrequires::pydocstyle>>
         <<requires::flake8 "flake8", endrequires::flake8>>
         <<requires::pre-commit "pre-commit", endrequires::pre-commit>>
     ]
@@ -67,7 +63,7 @@ setuptools.setup(
     long_description=read_file(os.path.join(HERE, "README.md")),
     long_description_content_type="text/markdown",
     <<requires::license license="Apache-2.0", endrequires::license>>
-    <<requires::url url=url endrequires::url>>,
+    url=url,
     <<requires::packaging project_urls=project_urls, endrequires::packaging>>
     version=version,
     packages=setuptools.find_packages(exclude=["tests"]),
