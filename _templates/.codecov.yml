@@ -37,7 +37,6 @@ parsers:
       method: true
       macro: false
 
-
 comment:
   layout: diff, reach
   behavior: default
