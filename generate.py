@@ -1,4 +1,4 @@
-import sys
+import sys, os
 from itertools import chain
 from pathlib import Path
 from pprint import pprint
@@ -317,8 +317,6 @@ def replace_templates(
 
         filesrc = Path(filename)
         filedst = path_replace(filesrc, TEMPLATE, TMPDIR)
-        print(filesrc)
-        print(filedst)
 
         if filesrc.is_dir():
             if not filedst.exists():
@@ -326,8 +324,13 @@ def replace_templates(
                 print("copied folder")
             continue
 
+        # Ignore images
+        extension = os.path.splitext(filename)[1]
+        if extension in [".png", ".jpg", ".jpeg", ".gif", ".svg", ".ico"]:
+            continue
+
         # Read in the file
-        with filesrc.open("r") as file:
+        with filesrc.open("r", encoding="utf-8") as file:
             data = file.read()
 
         # print(data)
@@ -339,8 +342,7 @@ def replace_templates(
             data = find_and_replace(data, k, v)
 
         # Write the file out again
-        with filedst.open("w") as file:
-            print("wrote template")
+        with filedst.open("w", encoding="utf-8") as file:
             file.write(data)
 
 
