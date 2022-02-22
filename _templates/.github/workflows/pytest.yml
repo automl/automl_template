@@ -29,12 +29,6 @@ env:
     --durations=20
     -v
 
-  <<requires::packaging
-  code-cov-python-version: "3.8"
-  code-cov-args: >-
-    --cov-report=xml
-  endrequires::packaging>>
-
 jobs:
 
   # General unit tests
@@ -163,39 +157,4 @@ jobs:
     - name: Tests
       run: |
         pytest ${{ env.pytest-args }} ${{ env.test-dir }}
-
-
-  # Testing with codecov coverage uploaded
-  codecov-test:
-    name: codecov-test
-
-    runs-on: "ubuntu-latest"
-    defaults:
-      run:
-        shell: bash
-
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-
-    - name: Setup Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ env.code-cov-python-version }}
-
-    - name: Install ${{ env.package-name }}
-      run: |
-        python -m pip install --upgrade pip
-        python -m pip install wheel
-        python -m pip install -e ".${{ env.extra-requires }}"
-
-    - name: Tests
-      run: |
-        pytest ${{ env.pytest-args }} --cov=${{env.package-name}} ${{ env.code-cov-args }} ${{ env.test-dir }}
-
-    - name: Upload coverage
-      uses: codecov/codecov-action@v2
-      with:
-        fail_ci_if_error: true
-        verbose: true
   endrequires::packaging>>
