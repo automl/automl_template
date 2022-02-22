@@ -25,7 +25,7 @@ python generate.py # student publication package
 # ... You'll be asked things about your repo, fill them in and confirm
 
 # Add the new repo contents
-git add *
+git add .
 
 # Add a commit with whatever message you like
 git commit -m "*mario voice* Wahoooo"
