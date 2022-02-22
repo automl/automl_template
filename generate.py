@@ -29,6 +29,7 @@ files: Dict[Path, Optional[List[str]]] = {
     WORKFLOWS / "pytest.yml": ["testing"],
     TEMPLATE / "src" / "py.typed": ["mypy"],
     TEMPLATE / "src" / "__init__.py": None,
+    TEMPLATE / "src" / "myfile.py": None,
     TEMPLATE / "setup.py": None,
     TEMPLATE / "Makefile": None,
     TEMPLATE / "MANIFEST.in": None,
