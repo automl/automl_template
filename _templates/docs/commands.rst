@@ -3,7 +3,7 @@ Helpful Commands
 
 .. warning::
 
-    This is a warning.
+    Remove this page in production mode.
 
 
 .. note::

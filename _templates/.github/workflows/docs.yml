@@ -1,26 +1,23 @@
 name: docs
 
 on:
-
   # Trigger manually
   workflow_dispatch:
 
-  # Trigger on any push to the master
+  # Trigger on any push to the main
   push:
     branches:
       - main
 
-  # Trigger on any push to a PR that targets master
+  # Trigger on any push to a PR that targets main
   pull_request:
     branches:
       - main
 
 env:
-
   name: <<name>>
 
 jobs:
-
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
@@ -30,26 +27,23 @@ jobs:
     - name: Setup Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.8
+        python-version: "3.8"
 
     - name: Install dependencies
       run: |
-        pip install -e ".[dev]"
+        pip install .
 
     - name: Make docs
       run: |
-        make docs
-
-    - name: Make Examples
-      run: |
-        make examples
-
+        cd docs
+        make clean
+        make html
 
     - name: Pull latest gh-pages
       if: (contains(github.ref, 'main'))
       run: |
         cd ..
-        git clone https://github.com/automl/${{ env.name }}.git --branch gh-pages --single-branch gh-pages
+        git clone https://github.com/${{ github.repository }}.git --branch gh-pages --single-branch gh-pages
 
     - name: Copy new docs into gh-pages
       if: (contains(github.ref, 'development') || contains(github.ref, 'main'))
@@ -71,4 +65,3 @@ jobs:
         git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
         git commit -am "$last_commit"
         git push
-

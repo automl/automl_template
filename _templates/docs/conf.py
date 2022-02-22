@@ -9,7 +9,8 @@ options = {
     "version": version,
     "name": name,
     "html_theme_options": {
-        "github_url": "https://automl.github.io/<<name>>/main"
+        "github_url": "https://github.com/<<organization>>/<<name>>",
+        "twitter_url": "https://twitter.com/automl_org?lang=de",
     }
 }
 
