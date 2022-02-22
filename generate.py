@@ -328,11 +328,11 @@ def replace_templates(
             continue
 
         # Skip mypy cache if it tries to sneaks in
-        if ".mypy_cache" in filename.parts:
+        if ".mypy_cache" in filesrc.parts:
             continue
 
         # Skip images
-        extension = os.path.splitext(filename)[1]
+        extension = os.path.splitext(filesrc)[1]
         if extension in [".png", ".jpg", ".jpeg", ".gif", ".svg", ".ico"]:
             continue
 
