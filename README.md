@@ -95,24 +95,24 @@ You can leave any (_optional_) things blank if not relevant.
 
 ## Config Table
 
-| **feature**               | `student`          | `publication`      | `package`          | <empty>    |
-| -----------               | ---------          | -------------      | ---------          | -------    |
-| [testing](#testing)       | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :question: |
-| [flake8](#flake8)         | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :question: |
-| [pydocstyle](#pydocstyle) | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :question: |
-| [docs](#docs)             | :x:                | :heavy_check_mark: | :heavy_check_mark: | :question: |
-| [black](#black)           | :x:                | :heavy_check_mark: | :heavy_check_mark: | :question: |
-| [isort](#isort)           | :x:                | :heavy_check_mark: | :heavy_check_mark: | :question: |
-| [citations](#citations)   | :x:                | :heavy_check_mark: | :heavy_check_mark: | :question: |
-| [license](#license)       | :x:                | :heavy_check_mark: | :heavy_check_mark: | :question: |
-| [packaging](#packaging)   | :x:                | :x:                | :heavy_check_mark: | :question: |
-| [pre-commit](#pre-commit) | :x:                | :x:                | :heavy_check_mark: | :question: |
-| [mypy](#mypy)             | :question:         | :question:         | :question:         | :question: |
+| **feature**               | `student`          | `publication`      | `package`          | _empty_         |
+| -----------               | ---------          | -------------      | ---------          | -------         |
+| [testing](#testing)       | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :grey_question: |
+| [flake8](#flake8)         | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :grey_question: |
+| [pydocstyle](#pydocstyle) | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :grey_question: |
+| [docs](#docs)             | :x:                | :heavy_check_mark: | :heavy_check_mark: | :grey_question: |
+| [black](#black)           | :x:                | :heavy_check_mark: | :heavy_check_mark: | :grey_question: |
+| [isort](#isort)           | :x:                | :heavy_check_mark: | :heavy_check_mark: | :grey_question: |
+| [citations](#citations)   | :x:                | :heavy_check_mark: | :heavy_check_mark: | :grey_question: |
+| [license](#license)       | :x:                | :heavy_check_mark: | :heavy_check_mark: | :grey_question: |
+| [packaging](#packaging)   | :x:                | :x:                | :heavy_check_mark: | :grey_question: |
+| [pre-commit](#pre-commit) | :x:                | :x:                | :heavy_check_mark: | :grey_question: |
+| [mypy](#mypy)             | :grey_question:    | :grey_question:    | :grey_question:    | :grey_question: |
 
 ## Features
 
 #### testing
-For testing, we include [`pytest`](https://docs.pytest.org/en/6.2.x/contents.html) and also provide a workflow file [`pytest.yml`][#pytest.yml]. The tests can be run locally with `pytest` or `make test` while every push will
+For testing, we include [`pytest`](https://docs.pytest.org/en/6.2.x/contents.html) and also provide a workflow file [`pytest.yml`](#pytest.yml). The tests can be run locally with `pytest` or `make test` while every push will
 also activate the workflow so you get automated tests on github.
 * configuration - `pyproject.toml`
 * run - `make test` or `pytest`
