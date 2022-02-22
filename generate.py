@@ -154,8 +154,8 @@ options: Dict[str, Any] = {
         "package-name": {
             "default": None,
             "prompt": (
-                "What is the name of your library when used in code? E.g. `import package_name`",
-            ),
+                "What is the name of your library when used in code? E.g. `import package_name`"
+            )
         },
         "organization": {
             "default": None,
