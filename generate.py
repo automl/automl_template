@@ -156,6 +156,13 @@ options: Dict[str, Any] = {
                 "What is the name of your library when used in code? E.g. `import package_name`",
             ),
         },
+        "organization": {
+            "default": None,
+            "prompt" (
+                "What is the name of your organization?"
+                "This is your usually your github name, e.g. `www.github.com/<organization>/<name>`"
+            )
+        },
         "author": {
             "default": None,
             "prompt": "What is your name or authors names? E.g. LeetCookieEater and ToastySocks",
