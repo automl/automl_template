@@ -66,7 +66,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     <<requires::license license="Apache-2.0", endrequires::license>>
     url=url,
-    <<requires::packaging project_urls=project_urls, endrequires::packaging>>
+    project_urls=project_urls,
     version=version,
     packages=setuptools.find_packages(exclude=["tests"]),
     python_requires=">=3.8",

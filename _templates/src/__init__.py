@@ -8,8 +8,8 @@ author_email = "<<email>>"
 description = "<<description>>"
 url = "<<url>>"
 project_urls = {
-    <<requires::docs "Documentation": "https://automl.github.io/<<package-name>>/main" endrequires::docs>>,
-    "Source Code": "https://github.com/automl/<<package-name>>",
+    <<requires::docs "Documentation": "https://<<organization>>.github.io/<<name>>/main" endrequires::docs>>,
+    "Source Code": "https://github.com/<<organization>>/<<package-name>>",
 }
-copyright = f"Copyright {datetime.date.today().strftime('%Y')}, AutoML.org Freiburg-Hannover"
+copyright = f"Copyright {datetime.date.today().strftime('%Y')}, <<author>>, <<author_email>>"
 version = "0.0.1"
