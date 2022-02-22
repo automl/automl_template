@@ -35,9 +35,8 @@ jobs:
 
     - name: Make docs
       run: |
-        cd docs
         make clean
-        make html
+        make docs
 
     - name: Pull latest gh-pages
       if: (contains(github.ref, 'main'))
