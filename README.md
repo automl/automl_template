@@ -40,12 +40,12 @@ in `setup.py` if you're curious!
 
 ```
 # Create a virtual env with pythons built in virtualenv
-python -m virtaulenv venv
-source ./venv/bin/activate
+python -m venv myenv
+source ./myenv/bin/activate
 
 # ... or using conda
-conda create -n myvenv python=3.8
-conda activate myvenv
+conda create -n myenv python=3.8
+conda activate myenv
 
 # Install the repo
 make install-dev
