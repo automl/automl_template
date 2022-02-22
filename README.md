@@ -14,20 +14,13 @@ Once you've done those steps, you'll want to download your repo, generate the te
 and push up your generated template to github.
 
 ```bash
-# With ssh
 git clone git@github.com:user/myrepo.git
-
-# With https
-git clone https://github.com/user/myrepo
 
 # Move into the cloned repoj
 cd myrepo
 
-# Generate the repo with whatever config you like
-python generate.py student
-
-# ... or blank to be asked about every feature
-python generate.py
+# Generate the repo , optionally with a predefined config
+python generate.py # student publication package
 
 # ... You'll be asked things about your repo, fill them in and confirm
 
@@ -36,6 +29,7 @@ git add *
 
 # Add a commit with whatever message you like
 git commit -m "*mario voice* Wahoooo"
+git push
 
 # ... and you're good to go!
 ```
