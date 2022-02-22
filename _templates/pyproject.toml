@@ -66,6 +66,7 @@ add-ignore = [ # http://www.pydocstyle.org/en/stable/error_codes.html
     "D213", # Multi-line docstring summary should start at the second line
     "D400", # First line should end with a period
     "D401", # First line should be in imperative mood
+    "D404", # First word of docstring should not be this
     "D413", # Missing blank line after last section
     "D415", # First line should end with a period, question mark, or exclamation point
 ]
