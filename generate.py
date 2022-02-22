@@ -402,13 +402,26 @@ def get_params() -> Dict[str, str]:
     params = {}
     for key, desc in options["params"].items():
         prompt = desc["prompt"]
-        default = desc["default"]
+        default = desc.get("default", None)
 
         if default is not None:
             prompt += f"\tDefault: {default}"
 
-        print(prompt)
-        val = input("> ")
+        valid = False
+        iters = 0
+        while not valid:
+            print(prompt)
+            val = input("> ")
+
+            if val in ["", "\n", None] and default is not None:
+                val = default
+                valid = True
+            else:
+                print("Please enter a value.\n")
+                iters += 1
+                if iters == 3:
+                    print("Exiting")
+                    sys.exit(1)
 
         params[key] = val
 
