@@ -160,7 +160,7 @@ options: Dict[str, Any] = {
             "default": None,
             "prompt": (
                 "What is the name of your organization?"
-                "This is your usually your github name, e.g. `www.github.com/<organization>/<name>`"
+                " This is your usually your github name, e.g. `www.github.com/<organization>/<name>`"
             )
         },
         "author": {
