@@ -29,9 +29,11 @@ env:
     --durations=20
     -v
 
+  <<requires::packaging
   code-cov-python-version: "3.8"
   code-cov-args: >-
     --cov-report=xml
+  endrequires::packaging>>
 
 jobs:
 
@@ -47,7 +49,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.8", "3.9", "3.10"]
+        python-version: ["3.8"]
         os: ["ubuntu-latest", "macos-latest", "windows-latest"]
 
     steps:
@@ -86,6 +88,7 @@ jobs:
             exit 1
         fi
 
+<<requires::packaging
   # Testing with conda
   conda-tests:
     name: conda-${{ matrix.python-version }}-${{ matrix.os }}
@@ -120,7 +123,7 @@ jobs:
     - name: Tests
       run: |
           pytest ${{ env.pytest-args }} ${{ env.test-dir }}
-          #
+
   # Testing a dist install
   dist-test:
     name: dist-${{ matrix.python-version }}-${{ matrix.os }}
@@ -195,3 +198,4 @@ jobs:
       with:
         fail_ci_if_error: true
         verbose: true
+  endrequires::packaging>>
