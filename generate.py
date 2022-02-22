@@ -2,7 +2,7 @@ import sys, os
 from itertools import chain
 from pathlib import Path
 from pprint import pprint
-from shutil import copytree
+from shutil import copytree, rmtree
 from typing import Any, Dict, List, Optional, Union
 
 HERE = Path(__file__).parent.resolve()
@@ -321,7 +321,6 @@ def replace_templates(
         if filesrc.is_dir():
             if not filedst.exists():
                 copytree(filesrc, filedst)
-                print("copied folder")
             continue
 
         # Ignore images
@@ -332,9 +331,6 @@ def replace_templates(
         # Read in the file
         with filesrc.open("r", encoding="utf-8") as file:
             data = file.read()
-
-        # print(data)
-        # print(filename)
 
         substitues: Dict[str, Union[str, bool]] = {**params, **features}
         for k, v in substitues.items():
@@ -378,8 +374,9 @@ def generate(params: Dict[str, str], features: Dict[str, bool]) -> None:
     src_newname = HERE / params["package-name"]
     src_folder.rename(src_newname)
 
-    # Delete template dir
-    # Delete the tmpdir directory
+    # Delete _template dir and _tmp
+    for path in [TEMPLATE, TMPDIR]:
+        rmtree(path)
 
 
 def get_params() -> Dict[str, str]:
@@ -448,11 +445,9 @@ def get_features(config_kind: Optional[str]) -> Dict[str, bool]:
         sys.exit(1)
 
     if set(features) & set(checkers):
-        print("include checkers")
         features["checkers"] = True
 
     if set(features) & set(formatters):
-        print("include formatters")
         features["formatters"] = True
 
     return features
