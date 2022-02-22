@@ -18,5 +18,3 @@ def test_construction_with_negative_a_raises_error(value):
     """
     with pytest.raises(ValueError):
         MyClass(a=value, b={})
-
-

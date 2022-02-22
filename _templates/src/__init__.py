@@ -1,6 +1,5 @@
 import datetime
 
-
 name = "<<name>>"
 package_name = "<<package-name>>"
 author = "<<author>>"
