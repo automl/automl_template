@@ -318,19 +318,19 @@ def replace_templates(
     if not out.exists():
         out.mkdir()
 
-    for filename in chain(dir.glob("**/*"), dir.glob("**/.*")):
+    filepaths = map(Path, chain(dir.glob("**/*"), dir.glob("**/.*")))
+
+    for filesrc in filepaths:
+
+        # Skip directories, files will create them if needed
+        if filesrc.is_dir():
+            continue
+
+        # Skip mypy cache if it tries to sneaks in
         if ".mypy_cache" in filename.parts:
             continue
 
-        filesrc = Path(filename)
-        filedst = path_replace(filesrc, TEMPLATE, TMPDIR)
-
-        if filesrc.is_dir():
-            if not filedst.exists():
-                copytree(filesrc, filedst)
-            continue
-
-        # Ignore images
+        # Skip images
         extension = os.path.splitext(filename)[1]
         if extension in [".png", ".jpg", ".jpeg", ".gif", ".svg", ".ico"]:
             continue
@@ -343,6 +343,13 @@ def replace_templates(
         for k, v in substitues.items():
             # Replace the target string
             data = find_and_replace(data, k, v)
+
+        # Get the destination of the file
+        filedst = path_replace(filesrc, TEMPLATE, TMPDIR)
+
+        # Create the directory it should go in if doesn't exist
+        if not filedst.parent.exists():
+            filedst.parent.mkdir(parents=True)
 
         # Write the file out again
         with filedst.open("w", encoding="utf-8") as file:
