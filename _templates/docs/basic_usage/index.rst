@@ -5,8 +5,6 @@ Basic Usage
    :hidden:
    :maxdepth: 2
 
-   commands
-
 
 .. warning::
 

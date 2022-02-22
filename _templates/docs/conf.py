@@ -10,6 +10,7 @@ options = {
     "name": name,
     "html_theme_options": {
         "github_url": "https://automl.github.io/<<name>>/main"
+        # "twitter_url": "https://automl.github.io/<<name>>/main"
     }
 }
 

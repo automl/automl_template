@@ -9,9 +9,10 @@ Home
    examples/index
    basic_usage/index
    advanced_usage/index
+   commands
    api
    glossary
    faq
 
 
-Package Overview
+Lorem ipsum dolor.
