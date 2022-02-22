@@ -22,7 +22,6 @@ files: Dict[Path, Optional[List[str]]] = {
     TEMPLATE / "pyproject.toml": formatters + ["mypy", "pydocstyle", "testing"],
     TEMPLATE / "LICENSE.txt": ["license"],
     TEMPLATE / "CITATION.cff": ["citation"],
-    TEMPLATE / ".codecov.yml": ["testing"],
     WORKFLOWS / "citation_cff.yml": ["citations"],
     WORKFLOWS / "docs.yml": ["docs"],
     WORKFLOWS / "pre-commit.yml": checkers + formatters,
