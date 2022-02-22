@@ -97,35 +97,21 @@ endrequires::isort>>
 format: <<requires::black format-black endrequires::black>> <<requires::isort format-isort endrequires::isort>>
 endrequires::formatters>>
 
+<<requires::testing
+test:
+	$(PYTEST) ${TESTS_DIR}
+endrequires::testing>>
+
 <<requires::docs
 clean-doc:
 	$(MAKE) -C ${DOCDIR} clean
-endrequires::docs>>
 
-<<requires::packaging
-clean-build:
-	$(PYTHON) setup.py clean
-	rm -rf ${DIST}
-endrequires::packaging>>
-
-# Clean up any builds in ./dist as well as doc, if present
-clean: <<requires::docs clean-doc endrequires::docs>> <<requires::packaging clean-build endrequires::packaging>>
-
-<<requires::packaging
-# Build a distribution in ./dist
-build:
-	$(PYTHON) setup.py sdist
-endrequires::packaging>>
-
-<<requires::docs
 docs:
 	$(MAKE) -C ${DOCDIR} docs
 	@echo
 	@echo "View docs at:"
 	@echo ${INDEX_HTML}
-endrequires::docs>>
 
-<<requires::docs
 examples:
 	$(MAKE) -C ${DOCDIR} examples
 	@echo
@@ -134,6 +120,14 @@ examples:
 endrequires::docs>>
 
 <<requires::packaging
+clean-build:
+	$(PYTHON) setup.py clean
+	rm -rf ${DIST}
+
+# Build a distribution in ./dist
+build:
+	$(PYTHON) setup.py sdist
+
 # Publish to testpypi
 # Will echo the commands to actually publish to be run to publish to actual PyPi
 # This is done to prevent accidental publishing but provide the same conveniences
@@ -155,10 +149,7 @@ publish: clean build
 	@echo
 	@echo "Once you have decided it works, publish to actual pypi with"
 	@echo
-	@echo "    python -m twine upload dist/*"
 endrequires::packaging>>
 
-<<requires::testing
-test:
-	$(PYTEST) ${TESTS_DIR}
-endrequires::testing>>
+# Clean up any builds in ./dist as well as doc, if present
+clean: <<requires::packaging clean-build endrequires::packaging>> <<requires::docs clean-doc endrequires::docs>>
