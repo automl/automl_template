@@ -7,7 +7,7 @@ You can follow [githubs docs](https://docs.github.com/en/repositories/creating-a
 2. Select yourself, the owner of the new repository.
 3. Give your repository a name.
 4. Make it public/private. If making it private, you'll have automated [workflow](#workflows) limits.
-5. Select **Include all branches** if you want published docs. No harm even if you don't.
+5. Select **Include all branches** if you want published docs. May as well even if you don'tn need docs yet!
 6. Click **Create repository from template**
 
 Once you've done those steps, you'll want to download your repo, generate the template
