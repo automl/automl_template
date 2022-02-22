@@ -6,7 +6,7 @@
 # Include individual files
 <<requires::license include LICENSE.txt endrequires::license>>
 include requirements.txt
-<<requires::mypy include automl_template/py.typed  # This file is to export types endrequires::mypy>>
+<<requires::mypy include <<package-name>>/py.typed  # This file is to export types endrequires::mypy>>
 
 <<requires::testing prune tests endrequires::testing>>
 <<requires::docs prune examples endrequires::docs>>

@@ -21,7 +21,7 @@ env:
 
   package-name: <<package-name>>
   test-dir: tests
-  extra-requires: "[tests]"  # "" for no extra_requires
+  extra-requires: "[dev]"  # "" for no extra_requires
 
   # Arguments used for pytest
   pytest-args: >-
