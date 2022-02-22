@@ -10,7 +10,8 @@ on:
       - main
 
   # Triggers with push to a pr aimed at main
-  pull_request: branches:
+  pull_request:
+    branches:
       - main
 
   schedule:
