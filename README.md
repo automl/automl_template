@@ -16,7 +16,7 @@ and push up your generated template to github.
 ```bash
 git clone git@github.com:user/myrepo.git
 
-# Move into the cloned repoj
+# Move into the cloned repo
 cd myrepo
 
 # Generate the repo , optionally with a predefined config
