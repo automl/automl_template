@@ -3,6 +3,7 @@ import os
 import setuptools
 
 from <<package-name>> import (
+    author,
     author_email,
     description,
     package_name,
@@ -58,6 +59,7 @@ extras_require = {
 
 setuptools.setup(
     name=package_name,
+    author=author,
     author_email=author_email,
     description=description,
     long_description=read_file(os.path.join(HERE, "README.md")),
