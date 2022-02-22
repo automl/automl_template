@@ -49,6 +49,7 @@ class MyClass:
         True, the values will have "foo", otherwise "bar".
 
         .. code:: python
+
             myclass = MyClass(a=2, b={}, c=True)
             print(myclass.spaghetti_hoops)
             {
@@ -76,6 +77,7 @@ class MyClass:
         an example
 
         .. code:: python
+
             result = myclass.some_function(42)
 
         Note
