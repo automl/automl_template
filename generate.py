@@ -177,7 +177,7 @@ options: Dict[str, Any] = {
             "prompt": "What description would you like to give for your repo?",
         },
         "url": {
-            "default": "www.automl.org",
+            "default": "www.somewhere.org",
             "prompt": "What url would you like to associate with this repo?",
         },
     },
@@ -413,15 +413,20 @@ def get_params() -> Dict[str, str]:
             print(prompt)
             val = input("> ")
 
-            if val in ["", "\n", None] and default is not None:
+            if val not in ["", "\n", None]:
+                valid = True
+
+            elif default is not None:
                 val = default
                 valid = True
-            else:
+
+            elif iters <= 3:
                 print("Please enter a value.\n")
                 iters += 1
-                if iters == 3:
-                    print("Exiting")
-                    sys.exit(1)
+
+            else:
+                print("Exiting")
+                sys.exit(1)
 
         params[key] = val
 
