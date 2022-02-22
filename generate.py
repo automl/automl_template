@@ -385,6 +385,10 @@ def generate(params: Dict[str, str], features: Dict[str, bool]) -> None:
     for path in [TEMPLATE, TMPDIR]:
         rmtree(path)
 
+    # Delete generate.py
+    this_file = Path(__file__).resolve()
+    this_file.unlink()
+
 
 def get_params() -> Dict[str, str]:
     params = {}
