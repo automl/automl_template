@@ -5,14 +5,14 @@ NAME := <<name>>
 PACKAGE_NAME := <<package-name>>
 
 DIR := "${CURDIR}"
-SOURCE_DIR := "${CURDIR}/${PACKAGE_NAME}"
-<<requires::packaging DIST := "${DIR}/dist" endrequires::packaging>>
+SOURCE_DIR := ${PACKAGE_NAME}
+<<requires::packaging DIST := dist endrequires::packaging>>
 <<requires::docs
-DOCDIR := "${DIR}/docs"
-INDEX_HTML := "file://${DOCDIR}/build/html/index.html"
-EXAMPLES_DIR := "${DIR}/examples"
+DOCDIR := docs
+INDEX_HTML := "file://${DIR}/docs/build/html/index.html"
+EXAMPLES_DIR := examples
 endrequires::docs>>
-<<requires::testing TESTS_DIR := "${DIR}/tests" endrequires::testing>>
+<<requires::testing TESTS_DIR := tests endrequires::testing>>
 
 .PHONY: help install-dev <<requires::checkers check endrequires::checkers>> <<requires::formatters format endrequires::formatters>> <<requires::pre-commit pre-commit endrequires::pre-commit>> clean <<requires::docs docs clean-doc examples endrequires::docs>> <<requires::packaging clean-build build publish endrequires::packaging>> <<requires::testing test endrequires::testing>>
 
