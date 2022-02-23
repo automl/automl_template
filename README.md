@@ -130,7 +130,9 @@ at `https://organization.github.io/myreponame/main/`. An example of how that loo
 automatically with a workflow [`docs.yml`](#docs.yml). You'll want to add this to your repos home page on the right for easy access ;)
 
 * configuration - `docs/conf.py`
-* run - `make docs` or `make examples`
+* run - `make docs` or `make examples` inside `docs`
+
+Your logo and favicon are shown if the files `docs/images/logo.png` or `docs/images/favicon.ico` can be found, respectively.
 
 #### black
 This feature will include a formatter called [`black`](https://black.readthedocs.io/en/stable/) which automatically formats your code to a stricter version of [`pep8`](https://www.python.org/dev/peps/pep-0008/) standards. This is useful for repos which will have multiple contributors so reviews can focus on the code changes and not stylistic changes.
