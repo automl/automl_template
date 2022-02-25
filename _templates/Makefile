@@ -149,6 +149,7 @@ publish: clean build
 	@echo
 	@echo "Once you have decided it works, publish to actual pypi with"
 	@echo
+	@echo "    python -m twine upload dist/*"
 endrequires::packaging>>
 
 # Clean up any builds in ./dist as well as doc, if present
