@@ -18,13 +18,13 @@ files: Dict[Path, Optional[List[str]]] = {
     TEMPLATE / "examples": ["docs"],
     TEMPLATE / "tests": ["testing"],
     TEMPLATE / ".flake8": ["flake8"],
-    TEMPLATE / ".pre-commit-config.yaml": checkers + formatters,
+    TEMPLATE / ".pre-commit-config.yaml": ["pre-commit"],
     TEMPLATE / "pyproject.toml": formatters + ["mypy", "pydocstyle", "testing"],
     TEMPLATE / "LICENSE.txt": ["license"],
     TEMPLATE / "CITATION.cff": ["citation"],
     WORKFLOWS / "citation_cff.yml": ["citations"],
     WORKFLOWS / "docs.yml": ["docs"],
-    WORKFLOWS / "pre-commit.yml": checkers + formatters,
+    WORKFLOWS / "pre-commit.yml": ["pre-commit"],
     WORKFLOWS / "pytest.yml": ["testing"],
     TEMPLATE / "src" / "py.typed": ["mypy"],
     TEMPLATE / "src" / "__init__.py": None,
@@ -154,14 +154,14 @@ options: Dict[str, Any] = {
             "default": None,
             "prompt": (
                 "What is the name of your library when used in code? E.g. `import package_name`"
-            )
+            ),
         },
         "organization": {
             "default": None,
             "prompt": (
                 "What is the name of your organization?"
                 " This is your usually your github name, e.g. `www.github.com/<organization>/<name>`"
-            )
+            ),
         },
         "author": {
             "default": None,
@@ -176,7 +176,7 @@ options: Dict[str, Any] = {
             "prompt": "What description would you like to give for your repo?",
         },
         "url": {
-            "default": "www.somewhere.org",
+            "default": "https://www.automl.org",
             "prompt": "What url would you like to associate with this repo?",
         },
     },
