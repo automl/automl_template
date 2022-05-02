@@ -16,6 +16,9 @@ on:
       - main
       - development
 
+permissions:
+  contents: write
+
 env:
   name: <<name>>
 
