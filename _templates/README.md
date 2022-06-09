@@ -17,7 +17,7 @@ make install-dev
 ```
 
 <<requires::docs
-Documentaiton at https://<<organization>>.github.io/<<name>>/main
+Documentation at https://<<organization>>.github.io/<<name>>/main
 endrequires::docs>>
 
 ## Minimal Example

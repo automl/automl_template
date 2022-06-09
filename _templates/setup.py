@@ -16,20 +16,6 @@ HERE = os.path.dirname(os.path.realpath(__file__))
 
 
 def read_file(filepath: str) -> str:
-    """
-    Read in a files contents
-
-    Parameters
-    ----------
-    filepath : str
-        The name of the file.
-
-    Returns
-    -------
-    str
-        The contents of the file.
-    """
-
     with open(filepath, "r", encoding="utf-8") as fh:
         return fh.read()
 
@@ -70,7 +56,9 @@ setuptools.setup(
     version=version,
     packages=setuptools.find_packages(exclude=["tests"]),
     python_requires=">=3.8",
-    install_requires=read_file(os.path.join(HERE, "requirements.txt")).split("\n"),
+    install_requires=[
+        "numpy"
+    ],
     extras_require=extras_require,
     <<requires::testing test_suite="pytest", endrequires::testing>>
     platforms=["Linux"],
