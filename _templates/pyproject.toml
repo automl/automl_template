@@ -28,7 +28,7 @@ endrequires::testing>>
 <<requires::black
 [tool.black]
 target-version = ['py38']
-line-length = 100
+line-length = 120
 endrequires::black>>
 
 <<requires::isort
