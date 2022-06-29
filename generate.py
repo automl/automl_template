@@ -1,8 +1,9 @@
-import sys, os
+import sys
+import os
 from itertools import chain
 from pathlib import Path
 from pprint import pprint
-from shutil import copytree, rmtree
+from shutil import rmtree
 from typing import Any, Dict, List, Optional, Union
 
 HERE = Path(__file__).parent.resolve()
