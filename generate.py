@@ -1,8 +1,9 @@
-import sys, os
+import sys
+import os
 from itertools import chain
 from pathlib import Path
 from pprint import pprint
-from shutil import copytree, rmtree
+from shutil import rmtree
 from typing import Any, Dict, List, Optional, Union
 
 HERE = Path(__file__).parent.resolve()
@@ -33,7 +34,6 @@ files: Dict[Path, Optional[List[str]]] = {
     TEMPLATE / "Makefile": None,
     TEMPLATE / "MANIFEST.in": None,
     TEMPLATE / "README.md": None,
-    TEMPLATE / "requirements.txt": None,
     TEMPLATE / ".gitignore": None,
 }
 
@@ -381,7 +381,7 @@ def generate(params: Dict[str, str], features: Dict[str, bool]) -> None:
             if not file_dst.parent.exists():
                 file_dst.parent.mkdir(parents=True)
 
-            generated_template.rename(file_dst)
+            generated_template.replace(file_dst)
 
     # Rename the src folder
     src_folder = HERE / "src"
