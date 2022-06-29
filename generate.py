@@ -34,7 +34,6 @@ files: Dict[Path, Optional[List[str]]] = {
     TEMPLATE / "Makefile": None,
     TEMPLATE / "MANIFEST.in": None,
     TEMPLATE / "README.md": None,
-    TEMPLATE / "requirements.txt": None,
     TEMPLATE / ".gitignore": None,
 }
 
