@@ -381,7 +381,7 @@ def generate(params: Dict[str, str], features: Dict[str, bool]) -> None:
             if not file_dst.parent.exists():
                 file_dst.parent.mkdir(parents=True)
 
-            generated_template.rename(file_dst)
+            generated_template.replace(file_dst)
 
     # Rename the src folder
     src_folder = HERE / "src"
