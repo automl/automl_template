@@ -1,20 +1,20 @@
 name: docs
 
-on:
-  # Trigger manually
-  workflow_dispatch:
-
-  # Trigger on any push to the main
-  push:
-    branches:
-      - main
-      - development
-
-  # Trigger on any push to a PR that targets main
-  pull_request:
-    branches:
-      - main
-      - development
+# on:
+#   # Trigger manually
+#   workflow_dispatch:
+#
+#   # Trigger on any push to the main
+#   push:
+#     branches:
+#       - main
+#       - development
+#
+#   # Trigger on any push to a PR that targets main
+#   pull_request:
+#     branches:
+#       - main
+#       - development
 
 permissions:
   contents: write

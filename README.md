@@ -6,7 +6,8 @@ You can follow [githubs docs](https://docs.github.com/en/repositories/creating-a
 1. On the repo [`automl_template`](https://github.com/automl/automl_template) hit **Use this template**.
 2. Select yourself, the owner of the new repository.
 3. Give your repository a name.
-4. Make it public/private. If making it private, you'll have automated [workflow](#workflows) limits.
+4. Make it public/private. If making it private, you'll have automated [workflow](#workflows) limits. By default these
+   are disabled but you can navigate to `.github/workflows` and uncomment everything under `on:` to enable them.
 5. Select **Include all branches** if you want published docs. May as well even if you don'tn need docs yet!
 6. Click **Create repository from template**
 
@@ -167,6 +168,8 @@ If you're **not** familiar with pythons typing or typing in general, we recommen
 ### Workflows
 Workflows are what github uses to automatically run certain things anytime there's a change in the repository.
 You probably don't need to mess with these files too much but you can find them in the `.github/workflows` folder. Github's documentation for this is [here](https://docs.github.com/en/actions/learn-github-actions)
+
+By default these are disabled but you can navigate to `.github/workflows` and uncomment everything under `on:` to enable them.
 
 #### `citations_cff.yml`
 This workflow activates whenever you change your `CITATION.cff` file and validates it.
