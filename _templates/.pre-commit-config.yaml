@@ -19,7 +19,7 @@ repos:
 
   <<requires::black
   - repo: https://github.com/ambv/black
-    rev: 22.1.0
+    rev: 23.3.0
     hooks:
       - id: black
         name: black formatter <<package-name>>
